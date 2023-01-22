@@ -1,0 +1,18 @@
+import cv2
+import mediapipe as mp
+import time
+
+cap = cv2.VideoCapture(0)
+
+currTime = 0
+prevTime = 0
+while True:
+    success, img = cap.read()
+    
+    currTime = time.time()
+    fps = 1/(currTime - prevTime)
+    prevTime = currTime
+    cv2.putText(img, 'FPS:'+str(int(fps)), (10,70), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
+    
+    cv2.imshow("Webcam Feed", img)
+    cv2.waitKey(1)
